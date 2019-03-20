@@ -1,0 +1,13 @@
+C:\Users\User\go
+├───bin
+├───pkg
+└───src
+    ├───coursera
+    │   ├───visibility
+    │   │   │───person
+    │   │   │   │───person.go
+    │   │   │   └───func.go
+    │   │   └───main.go
+    └───github.com
+        └───rvasily
+            └───examplerepo
