@@ -1,33 +1,37 @@
-# Полезные книги общего характера
+# Разработка веб-сервисов на Go
 
-## Алгоритмы
+TODO
+
+## Полезные книги общего характера
+
+### Алгоритмы
 
 - [Грокаем алгоритмы](https://www.ozon.ru/context/detail/id/139296295/)
 - [Теоретический минимум по Computer Science](https://www.ozon.ru/context/detail/id/144946027/)
 - [Карьера программиста](https://www.piter.com/collection/all/product/kariera-programmista-6-e-izdanie-2)
 
-## Культура программирования
+### Культура программирования
 
 - [Чистый код](https://www.ozon.ru/context/detail/id/142429922/)
 - [Идеальный программист](https://www.ozon.ru/context/detail/id/135465064/)
 - [Чистая архитектура](https://www.ozon.ru/context/detail/id/144499396/)
 - [Совершенный код](https://www.ozon.ru/context/detail/id/142768363/)
 
-## Базы данных
+### Базы данных
 
 - [Высоконагруженные приложения](https://www.ozon.ru/context/detail/id/144402960/)
 
-## Производительность
+### Производительность
 
 - [Systems Performance Enterprise and the Cloud](https://www.amazon.com/Systems-Performance-Enterprise-Brendan-Gregg/dp/0133390098)
 
-## Эксплуатация
+### Эксплуатация
 
 - [Site Reliability Engineering](https://www.piter.com/collection/soon/product/site-reliability-engineering-nadezhnost-i-bezotkaznost-kak-v-google)
 
-# Материалы для чтения к 1-му уроку
+## Материалы для чтения к 1-му уроку
 
-## Материалы для дополнительного чтения на английском:
+### Материалы для дополнительного чтения на английском:
 
 - [https://golang.org/ref/spec](https://golang.org/ref/spec) - спецификация по язык
 - [https://golang.org/ref/mem](https://golang.org/ref/mem) - модель памяти го. на начальном этапе не надо, но знать полезно
@@ -53,7 +57,7 @@
 - :exclamation: [https://www.youtube.com/watch?v=MzTcsI6tn-0](https://www.youtube.com/watch?v=MzTcsI6tn-0) - как организовать код
 - :exclamation: [https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1](https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1) - статья на предыдущую тему
 
-## Материалы для дополнительного чтения на русском:
+### Материалы для дополнительного чтения на русском:
 
 - :exclamation: [https://habrahabr.ru/company/mailru/blog/314804/](https://habrahabr.ru/company/mailru/blog/314804/) - 50 оттенков го. обязательно к прочтению. многое оттуда мы ещё не проходили, но на будущее - имейте ввиду
 - [https://habrahabr.ru/post/306914/](https://habrahabr.ru/post/306914/) - Разбираемся в Go: пакет io
@@ -65,19 +69,19 @@
 - [https://habrahabr.ru/post/276981/](https://habrahabr.ru/post/276981/) - Краш-курс по интерфейсам в Go
 - [http://golang-book.ru](http://golang-book.ru)
 
-## Литература по го на русском языке:
+### Литература по го на русском языке:
 
 - Язык программирования Go, Алан А. А. Донован, Брайан У. Керниган
 - Go на практике, Matt Butcher, Мэтт Фарина Мэтт
 - Программирование на Go. Разработка приложений XXI века, Марк Саммерфильд
 
-## Дополнительные упражнения:
+### Дополнительные упражнения:
 
 - [https://go-tour-ru-ru.appspot.com/list](https://go-tour-ru-ru.appspot.com/list) - упражнения на овладение базовым синтаксисом, на случай если вам нужна небольшая практика перед первым заданием курса
 
-# Материалы для чтения ко 2-му уроку
+## Материалы для чтения ко 2-му уроку
 
-## На английском:
+### На английском:
 
 - [https://blog.golang.org/race-detector](https://blog.golang.org/race-detector)
 - [https://blog.golang.org/pipelines](https://blog.golang.org/pipelines)
@@ -90,28 +94,28 @@
 - [http://www.tapirgames.com/blog/golang-channel-closing](http://www.tapirgames.com/blog/golang-channel-closing)
 - [https://github.com/golang/go/wiki/CommonMistakes](https://github.com/golang/go/wiki/CommonMistakes)
 
-## Видео:
+### Видео:
 
 - [https://www.youtube.com/watch?v=5buaPyJ0XeQ](https://www.youtube.com/watch?v=5buaPyJ0XeQ) - классное выступление Dave Cheney про функции первого класса и использование их с горутинами, очень рекомендую, оно небольшое
 - :exclamation: [https://www.youtube.com/watch?v=f6kdp27TYZs](https://www.youtube.com/watch?v=f6kdp27TYZs) - Google I/O 2012 - Go Concurrency Patterns - очень рекомендую
 - [https://www.youtube.com/watch?v=rDRa23k70CU&list=PLDWZ5uzn69eyM81omhIZLzvRhTOXvpeX9&index=15](https://www.youtube.com/watch?v=rDRa23k70CU&list=PLDWZ5uzn69eyM81omhIZLzvRhTOXvpeX9&index=15) - ещё одно хорошее видео про паттерны конкуренции в го
 - [https://www.youtube.com/watch?v=KAWeC9evbGM](https://www.youtube.com/watch?v=KAWeC9evbGM) - видео Андрея Смирнова с конференции Highload - в нём вы можете получить более детальную информацию по теме вводного видео (методы обработки запросов и плюсы неблокирующего подхода), о том, что там творится на системном уровне. На русском, не про go
 
-## На русском:
+### На русском:
 
 - [https://habrahabr.ru/post/141853/](https://habrahabr.ru/post/141853/) - как работают горутины
 - [https://habrahabr.ru/post/308070/](https://habrahabr.ru/post/308070/) - как работают каналы
-- [https://habrahabr.ru/post/333654/](https://habrahabr.ru/post/333654/) - как работает планировщик ( [](https://rakyll.org/scheduler/))[](https://rakyll.org/scheduler/))[https://rakyll.org/scheduler/](https://rakyll.org/scheduler/) )
+- [https://habrahabr.ru/post/333654/](https://habrahabr.ru/post/333654/) - как работает планировщик ([https://rakyll.org/scheduler/](https://rakyll.org/scheduler/))
 - [https://habrahabr.ru/post/271789/](https://habrahabr.ru/post/271789/) - танцы с мютексами
 
-## Книги:
+### Книги:
 
 - Язык программирования Go, Алан А. А. Донован, Брайан У. Керниган - глава 8
 - Concurrency in Go: Tools and Techniques for Developers, by Katherine Cox-Buday
 
-# Материалы для чтения к 3-му уроку
+## Материалы для чтения к 3-му уроку
 
-## Рефлексия и кодогенерация:
+### Рефлексия и кодогенерация:
 
 - [https://blog.golang.org/laws-of-reflection](https://blog.golang.org/laws-of-reflection)
 - [https://habrahabr.ru/post/269887/](https://habrahabr.ru/post/269887/)
@@ -123,16 +127,16 @@
 - [https://medium.com/kokster/go-reflection-creating-objects-from-types-part-i-primitive-types-6119e3737f5d](https://medium.com/kokster/go-reflection-creating-objects-from-types-part-i-primitive-types-6119e3737f5d)
 - [https://medium.com/kokster/go-reflection-creating-objects-from-types-part-ii-composite-types-69a0e8134f20](https://medium.com/kokster/go-reflection-creating-objects-from-types-part-ii-composite-types-69a0e8134f20)
 
-## Производительность:
+### Производительность:
 
-### Материалы на русском:
+#### Материалы на русском:
 
 - :exclamation: [https://habrahabr.ru/company/badoo/blog/301990/](https://habrahabr.ru/company/badoo/blog/301990/)
 - :exclamation: [https://habrahabr.ru/company/badoo/blog/324682/](https://habrahabr.ru/company/badoo/blog/324682/)
 - :exclamation: [https://habrahabr.ru/company/badoo/blog/332636/](https://habrahabr.ru/company/badoo/blog/332636/)
 - :exclamation: [https://habrahabr.ru/company/mailru/blog/331784/](https://habrahabr.ru/company/mailru/blog/331784/) - статья про то как Почта@Mail.ru держит 3 миллиона вебсокет-соединений
 
-### Материалы на английском:
+#### Материалы на английском:
 
 - [https://blog.golang.org/profiling-go-programs](https://blog.golang.org/profiling-go-programs)
 - [https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/](https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/) - большая статья, посвященная go tool trace
@@ -159,11 +163,11 @@
 - [https://bravenewgeek.com/so-you-wanna-go-fast/](https://bravenewgeek.com/so-you-wanna-go-fast/)
 - [https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7](https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7)
 
-## Тесты:
+### Тесты:
 
 - [https://blog.golang.org/cover](https://blog.golang.org/cover) - расширенная информация о go test -cover
 
-## Полезные инструменты:
+### Полезные инструменты:
 
 - [https://mholt.github.io/json-to-go](https://mholt.github.io/json-to-go) - позволяет по json сформировать структуру на go, в которую он может быть распакован
 - [https://github.com/mailru/easyjson](https://github.com/mailru/easyjson) - кодогенератор для json от mail.ru
