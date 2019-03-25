@@ -32,12 +32,14 @@ func FastSearch(out io.Writer) {
 		isMSIE    bool
 	)
 
+	user := User{}
 	browsers := map[string]bool{}
+
 	fmt.Fprintln(out, "found users:")
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		user := User{}
+
 		if err = user.UnmarshalJSON(scanner.Bytes()); err != nil {
 			panic(err)
 		}
