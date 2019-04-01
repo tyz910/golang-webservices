@@ -1,0 +1,25 @@
+mode: set
+golang-webservices/homeworks/hw4_test_coverage/client.go:67.80,71.19 2 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:74.2,74.20 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:77.2,77.20 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:82.2,94.16 10 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:100.2,103.25 3 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:120.2,122.16 3 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:126.2,127.28 2 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:134.2,134.21 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:71.19,73.3 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:74.20,76.3 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:77.20,79.3 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:94.16,95.54 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:98.3,98.50 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:95.54,97.4 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:104.31,105.44 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:106.38,107.53 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:108.29,111.17 3 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:114.3,114.44 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:117.3,117.73 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:111.17,113.4 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:114.44,116.4 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:122.16,124.3 1 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:127.28,130.3 2 1
+golang-webservices/homeworks/hw4_test_coverage/client.go:130.8,132.3 1 1
