@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Inbox</title>
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <style>
+            .row { margin: 10px; border: 1px solid silver;}
+        </style>
+    </head>
+<body>
+<div class="container" id="">
+        <h1>Messages</h1>
+</div>
+
+<div class="container" id="messages">
+    <div class="row"></div>
+</div>
+<script>
+
+    function newMessage(msg) {
+        // msg = {email: "vasily@mail.ru", subject: "testing testing", name: "rvasily"}
+
+        // dont do this!
+        // completly insecure to XSS
+        msgNode = '<div class="col-sm">'+msg.name+' &laquo;'+msg.email+'&raquo;</div>'
+            + '<div class="col-sm">'+msg.subject+'</div>';
+
+        var node = document.createElement("div");
+        node.className = "row";
+        node.innerHTML = msgNode;
+
+        msgs = document.getElementById("messages")
+        msgs.insertBefore(node, msgs.childNodes[0]);
+    }
+    
+    conn = new WebSocket("ws://127.0.0.1:8080/notifications");
+    conn.onmessage = function (event) {
+        newMessage(JSON.parse(event.data));
+    };
+</script>
+</body>
+</html>

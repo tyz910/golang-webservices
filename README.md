@@ -31,7 +31,7 @@ TODO
 
 ## Материалы для чтения к 1-му уроку
 
-### Материалы для дополнительного чтения на английском:
+### Материалы для дополнительного чтения на английском
 
 - [https://golang.org/ref/spec](https://golang.org/ref/spec) - спецификация по язык
 - [https://golang.org/ref/mem](https://golang.org/ref/mem) - модель памяти го. на начальном этапе не надо, но знать полезно
@@ -57,7 +57,7 @@ TODO
 - :exclamation: [https://www.youtube.com/watch?v=MzTcsI6tn-0](https://www.youtube.com/watch?v=MzTcsI6tn-0) - как организовать код
 - :exclamation: [https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1](https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1) - статья на предыдущую тему
 
-### Материалы для дополнительного чтения на русском:
+### Материалы для дополнительного чтения на русском
 
 - :exclamation: [https://habrahabr.ru/company/mailru/blog/314804/](https://habrahabr.ru/company/mailru/blog/314804/) - 50 оттенков го. обязательно к прочтению. многое оттуда мы ещё не проходили, но на будущее - имейте ввиду
 - [https://habrahabr.ru/post/306914/](https://habrahabr.ru/post/306914/) - Разбираемся в Go: пакет io
@@ -69,19 +69,19 @@ TODO
 - [https://habrahabr.ru/post/276981/](https://habrahabr.ru/post/276981/) - Краш-курс по интерфейсам в Go
 - [http://golang-book.ru](http://golang-book.ru)
 
-### Литература по го на русском языке:
+### Литература по го на русском языке
 
 - Язык программирования Go, Алан А. А. Донован, Брайан У. Керниган
 - Go на практике, Matt Butcher, Мэтт Фарина Мэтт
 - Программирование на Go. Разработка приложений XXI века, Марк Саммерфильд
 
-### Дополнительные упражнения:
+### Дополнительные упражнения
 
 - [https://go-tour-ru-ru.appspot.com/list](https://go-tour-ru-ru.appspot.com/list) - упражнения на овладение базовым синтаксисом, на случай если вам нужна небольшая практика перед первым заданием курса
 
 ## Материалы для чтения ко 2-му уроку
 
-### На английском:
+### На английском
 
 - [https://blog.golang.org/race-detector](https://blog.golang.org/race-detector)
 - [https://blog.golang.org/pipelines](https://blog.golang.org/pipelines)
@@ -94,28 +94,28 @@ TODO
 - [http://www.tapirgames.com/blog/golang-channel-closing](http://www.tapirgames.com/blog/golang-channel-closing)
 - [https://github.com/golang/go/wiki/CommonMistakes](https://github.com/golang/go/wiki/CommonMistakes)
 
-### Видео:
+### Видео
 
 - [https://www.youtube.com/watch?v=5buaPyJ0XeQ](https://www.youtube.com/watch?v=5buaPyJ0XeQ) - классное выступление Dave Cheney про функции первого класса и использование их с горутинами, очень рекомендую, оно небольшое
 - :exclamation: [https://www.youtube.com/watch?v=f6kdp27TYZs](https://www.youtube.com/watch?v=f6kdp27TYZs) - Google I/O 2012 - Go Concurrency Patterns - очень рекомендую
 - [https://www.youtube.com/watch?v=rDRa23k70CU&list=PLDWZ5uzn69eyM81omhIZLzvRhTOXvpeX9&index=15](https://www.youtube.com/watch?v=rDRa23k70CU&list=PLDWZ5uzn69eyM81omhIZLzvRhTOXvpeX9&index=15) - ещё одно хорошее видео про паттерны конкуренции в го
 - [https://www.youtube.com/watch?v=KAWeC9evbGM](https://www.youtube.com/watch?v=KAWeC9evbGM) - видео Андрея Смирнова с конференции Highload - в нём вы можете получить более детальную информацию по теме вводного видео (методы обработки запросов и плюсы неблокирующего подхода), о том, что там творится на системном уровне. На русском, не про go
 
-### На русском:
+### На русском
 
 - [https://habrahabr.ru/post/141853/](https://habrahabr.ru/post/141853/) - как работают горутины
 - [https://habrahabr.ru/post/308070/](https://habrahabr.ru/post/308070/) - как работают каналы
 - [https://habrahabr.ru/post/333654/](https://habrahabr.ru/post/333654/) - как работает планировщик ([https://rakyll.org/scheduler/](https://rakyll.org/scheduler/))
 - [https://habrahabr.ru/post/271789/](https://habrahabr.ru/post/271789/) - танцы с мютексами
 
-### Книги:
+### Книги
 
 - Язык программирования Go, Алан А. А. Донован, Брайан У. Керниган - глава 8
 - Concurrency in Go: Tools and Techniques for Developers, by Katherine Cox-Buday
 
 ## Материалы для чтения к 3-му уроку
 
-### Рефлексия и кодогенерация:
+### Рефлексия и кодогенерация
 
 - [https://blog.golang.org/laws-of-reflection](https://blog.golang.org/laws-of-reflection)
 - [https://habrahabr.ru/post/269887/](https://habrahabr.ru/post/269887/)
@@ -127,16 +127,16 @@ TODO
 - [https://medium.com/kokster/go-reflection-creating-objects-from-types-part-i-primitive-types-6119e3737f5d](https://medium.com/kokster/go-reflection-creating-objects-from-types-part-i-primitive-types-6119e3737f5d)
 - [https://medium.com/kokster/go-reflection-creating-objects-from-types-part-ii-composite-types-69a0e8134f20](https://medium.com/kokster/go-reflection-creating-objects-from-types-part-ii-composite-types-69a0e8134f20)
 
-### Производительность:
+### Производительность
 
-#### Материалы на русском:
+#### Материалы на русском
 
 - :exclamation: [https://habrahabr.ru/company/badoo/blog/301990/](https://habrahabr.ru/company/badoo/blog/301990/)
 - :exclamation: [https://habrahabr.ru/company/badoo/blog/324682/](https://habrahabr.ru/company/badoo/blog/324682/)
 - :exclamation: [https://habrahabr.ru/company/badoo/blog/332636/](https://habrahabr.ru/company/badoo/blog/332636/)
 - :exclamation: [https://habrahabr.ru/company/mailru/blog/331784/](https://habrahabr.ru/company/mailru/blog/331784/) - статья про то как Почта@Mail.ru держит 3 миллиона вебсокет-соединений
 
-#### Материалы на английском:
+#### Материалы на английском
 
 - [https://blog.golang.org/profiling-go-programs](https://blog.golang.org/profiling-go-programs)
 - [https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/](https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/) - большая статья, посвященная go tool trace
@@ -163,18 +163,18 @@ TODO
 - [https://bravenewgeek.com/so-you-wanna-go-fast/](https://bravenewgeek.com/so-you-wanna-go-fast/)
 - [https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7](https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7)
 
-### Тесты:
+### Тесты
 
 - [https://blog.golang.org/cover](https://blog.golang.org/cover) - расширенная информация о go test -cover
 
-### Полезные инструменты:
+### Полезные инструменты
 
 - [https://mholt.github.io/json-to-go](https://mholt.github.io/json-to-go) - позволяет по json сформировать структуру на go, в которую он может быть распакован
 - [https://github.com/mailru/easyjson](https://github.com/mailru/easyjson) - кодогенератор для json от mail.ru
 
 ## Материалы для чтения к 4-му уроку
 
-### Конечно же документация:
+### Конечно же документация
 
 - [https://golang.org/pkg/net/http/](https://golang.org/pkg/net/http/)
 
@@ -195,3 +195,56 @@ TODO
 ### На русском:
 
 - [https://habrahabr.ru/post/330512/](https://habrahabr.ru/post/330512/) - Многопользовательская игра на Go через telnet - чисто сеть
+
+## Материалы для чтения к 5-му уроку
+
+### Основная и самая важная ссылка, касательно компонентов
+
+**[https://github.com/avelino/awesome-go](https://github.com/avelino/awesome-go)**
+
+### Шаблоны
+
+- [https://github.com/SlinSo/goTemplateBenchmark](https://github.com/SlinSo/goTemplateBenchmark#full-featured-template-engines-2)
+
+### Роутеры
+
+- [https://github.com/gorilla/mux](https://github.com/gorilla/mux) - один из компонентов gorillatoolkit, из которых можно собрать себе полноценный фреймворк
+- [https://github.com/julienschmidt/httprouter](https://github.com/julienschmidt/httprouter)
+- [https://github.com/valyala/fasthttp](https://github.com/valyala/fasthttp)
+- [https://github.com/julienschmidt/go-http-routing-benchmark](https://github.com/julienschmidt/go-http-routing-benchmark)
+
+### Фреймворки
+
+- [https://beego.me/](https://beego.me/)
+- [https://github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)
+- [https://github.com/Massad/gin-boilerplate](https://github.com/Massad/gin-boilerplate)
+- [https://github.com/gramework/gramework](https://github.com/gramework/gramework) - быстрый веб-ферймворк на основе fasthttp
+
+### Логирование
+
+- [https://github.com/uber-go/zap](https://github.com/uber-go/zap)
+- [https://github.com/sirupsen/logrus](https://github.com/sirupsen/logrus)
+- [https://www.youtube.com/watch?v=c_MPDg2C9tg](https://www.youtube.com/watch?v=c_MPDg2C9tg) - видео по структурному логирования
+- [https://habrahabr.ru/company/badoo/blog/328722/](https://habrahabr.ru/company/badoo/blog/328722/)
+
+### Веб-сокеты
+
+- [https://github.com/gorilla/websocket](https://github.com/gorilla/websocket)
+- [https://github.com/gobwas/ws](https://github.com/gobwas/ws) - библиотека для низкоуровневой работы в веб-сокетами от Mail.ru, которая позволяет существенно сэкономить на памяти сервера
+- [https://github.com/olahol/melody](https://github.com/olahol/melody)
+
+### Управление зависимостями
+
+- [https://github.com/golang/dep](https://github.com/golang/dep)
+- [https://hackernoon.com/using-go-dep-as-a-project-maintainer-641d1f3006d7](https://hackernoon.com/using-go-dep-as-a-project-maintainer-641d1f3006d7)
+- [https://about.sourcegraph.com/go/the-new-era-of-go-package-management/](https://about.sourcegraph.com/go/the-new-era-of-go-package-management/)
+- [https://medium.freecodecamp.org/an-intro-to-dep-how-to-manage-your-golang-project-dependencies-7b07d84e7ba5](https://medium.freecodecamp.org/an-intro-to-dep-how-to-manage-your-golang-project-dependencies-7b07d84e7ba5)
+- [https://blog.gopheracademy.com/advent-2015/vendor-folder/](https://blog.gopheracademy.com/advent-2015/vendor-folder/)
+
+### Безопасность
+
+- [https://github.com/Checkmarx/Go-SCP](https://github.com/Checkmarx/Go-SCP)
+
+### Дополнительные материалы
+
+- [https://github.com/golang-standards/project-layout](https://github.com/golang-standards/project-layout)

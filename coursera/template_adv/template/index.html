@@ -1,0 +1,37 @@
+<%!
+import (
+    "coursera/template_adv/item"
+)
+%>
+
+<%: func Index(items []*item.Item, buffer *bytes.Buffer) %>
+
+<%~ "base.html" %>
+
+<%@ body { %>
+<div class="container">
+    <h1>Posts</h1>
+    <table class="table">
+    <thead>
+        <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th style="width:140px;"><a href="/items/new" class="btn btn-success">New</a></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% for _, item := range items { %>
+    <tr>
+        <td><%==i item.Id %></td>
+        <td><%= item.Title %></td>
+        <td><%= item.Description %></td>
+        <td>
+            <a href="/items/<%==i item.Id %>" class="btn btn-primary">Edit</a>
+            <span data-id="<%==i item.Id %>" class="do-delete btn btn-danger">Del</span>
+        </td>
+    </tr>
+    <% } %>
+    </tbody>
+</div>
+<% } %>
