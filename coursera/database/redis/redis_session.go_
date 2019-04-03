@@ -1,0 +1,164 @@
+package main
+
+import (
+	"flag"
+	"fmt"
+	"math/rand"
+	"net/http"
+	"time"
+
+	"github.com/garyburd/redigo/redis"
+)
+
+func mainPage(w http.ResponseWriter, r *http.Request) {
+	session, err := r.Cookie("session_id")
+	// учебный пример! это не проверка авторизации!
+	loggedIn := (err != http.ErrNoCookie)
+
+	if loggedIn {
+		fmt.Fprintln(w, `<a href="/logout">logout</a>`)
+		fmt.Fprintln(w, "Welcome, "+session.Value)
+	} else {
+		fmt.Fprintln(w, `<a href="/login">login</a>`)
+		fmt.Fprintln(w, "You need to login")
+	}
+}
+
+func loginPage(w http.ResponseWriter, r *http.Request) {
+	expiration := time.Now().Add(10 * time.Hour)
+
+	session_id := RandStringRunes(10)
+
+	cookie := http.Cookie{
+		Name:    "session_id",
+		Value:   "rvasily",
+		Expires: expiration,
+	}
+	http.SetCookie(w, &cookie)
+	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+func logoutPage(w http.ResponseWriter, r *http.Request) {
+	session, err := r.Cookie("session_id")
+	if err == http.ErrNoCookie {
+		http.Redirect(w, r, "/", http.StatusFound)
+		return
+	}
+	session.Expires = time.Now().AddDate(0, 0, -1)
+	http.SetCookie(w, session)
+	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+func logoutAllPage(w http.ResponseWriter, r *http.Request) {
+	session, err := r.Cookie("session_id")
+	if err == http.ErrNoCookie {
+		http.Redirect(w, r, "/", http.StatusFound)
+		return
+	}
+	session.Expires = time.Now().AddDate(0, 0, -1)
+	http.SetCookie(w, session)
+	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+// -----------
+
+func adminIndex(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, `<a href="/">site index</a>`)
+	fmt.Fprintln(w, "Admin main page")
+}
+
+func panicPage(w http.ResponseWriter, r *http.Request) {
+	panic("this must me recovered")
+}
+
+// -----------
+
+func pageWithAllChecks(w http.ResponseWriter, r *http.Request) {
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("recovered", err)
+			http.Error(w, "Internal server error", 500)
+		}
+	}()
+	defer func(start time.Time) {
+		fmt.Printf("[%s] %s, %s %s\n",
+			r.Method, r.RemoteAddr, r.URL.Path, time.Since(start))
+	}(time.Now())
+
+	_, err := r.Cookie("session_id")
+	// учебный пример! это не проверка авторизации!
+	if err != nil {
+		fmt.Println("no auth at", r.URL.Path)
+		http.Redirect(w, r, "/", http.StatusFound)
+		return
+	}
+
+	// your logic
+}
+
+// -----------
+
+func adminAuthMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("adminAuthMiddleware", r.URL.Path)
+		_, err := r.Cookie("session_id")
+		// учебный пример! это не проверка авторизации!
+		if err != nil {
+			fmt.Println("no auth at", r.URL.Path)
+			http.Redirect(w, r, "/", http.StatusFound)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
+var (
+	redisAddr = flag.String("addr", "redis://user:@localhost:6379/0", "redis addr")
+
+	redisConn redis.Conn
+
+	users = map[string]int{
+		"rvasily":        1,
+		"romanov.vasily": 2,
+	}
+)
+
+// -----------
+
+func main() {
+	flag.Parse()
+
+	var err error
+	c, err = redis.DialURL(*redisAddr)
+
+	adminMux := http.NewServeMux()
+	adminMux.HandleFunc("/admin/", adminIndex)
+	adminMux.HandleFunc("/admin/panic", panicPage)
+
+	// set middleware
+	adminHandler := sessionMiddleware(adminMux)
+
+	siteMux := http.NewServeMux()
+	siteMux.Handle("/admin/", adminHandler)
+	siteMux.HandleFunc("/login", loginPage)
+	siteMux.HandleFunc("/logout", logoutPage)
+	siteMux.HandleFunc("/logout_all", logoutAllPage)
+	siteMux.HandleFunc("/", mainPage)
+
+	// set middleware
+	siteHandler := accessLogMiddleware(siteMux)
+	siteHandler = panicMiddleware(siteHandler)
+
+	fmt.Println("starting server at :8080")
+	http.ListenAndServe(":8080", siteHandler)
+}
+
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func RandStringRunes(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
+}
