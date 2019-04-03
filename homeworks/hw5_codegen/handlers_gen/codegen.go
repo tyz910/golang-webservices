@@ -6,13 +6,13 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"html/template"
 	"io"
 	"log"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"text/template"
 )
 
 func main() {
@@ -263,11 +263,7 @@ func newCodeGenerator(out io.Writer, data *parsedFile) *codeGenerator {
 
 // Generate генерация кода
 func (g *codeGenerator) Generate() {
-	fmt.Fprintf(g.out, "package %s\n", g.data.PackageName)
-
-	g.writeImports()
-	g.writeHelpers()
-	g.writeValidators()
+	g.writeHeader()
 
 	serveTpl := g.newServeTpl()
 	wrapperTpl := g.newWrapperTpl()
@@ -286,9 +282,10 @@ func (g *codeGenerator) Generate() {
 	}
 }
 
-// writeImports пишет импорты
-func (g *codeGenerator) writeImports() {
-	fmt.Fprint(g.out, `
+// writeHeader пишет имя пакета и импорты
+func (g *codeGenerator) writeHeader() {
+	fmt.Fprintf(g.out, `package %s
+
 import (
 	"encoding/json"
 	"fmt"
@@ -298,101 +295,16 @@ import (
 	"strconv"
 	"strings"
 )
-`)
-}
-
-// writeHelpers пишет вспомогательные функции
-func (g *codeGenerator) writeHelpers() {
-	fmt.Fprint(g.out, `
-type ApiResponse struct {
-	Data       interface{} `+"`"+`json:"response,omitempty"`+"`"+`
-	Error      string      `+"`"+`json:"error"`+"`"+`
-	statusCode int
-}
-
-func sendResponse(w http.ResponseWriter, response ApiResponse) {
-	if response.statusCode != 0 {
-		w.WriteHeader(response.statusCode)
-	}
-
-	js, _ := json.Marshal(response)
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
-}
-
-func getParams(r *http.Request) (params url.Values) {
-	if r.Method == "POST" {
-		body, _ := ioutil.ReadAll(r.Body)
-		params, _ = url.ParseQuery(string(body))
-	} else {
-		params = r.URL.Query()
-	}
-
-	return params
-}`)
-}
-
-// writeValidators пишет функции-валидаторы
-func (g *codeGenerator) writeValidators() {
-	fmt.Fprint(g.out, `
-func validateEmpty(field string, val string) error {
-	if val == "" {
-		return ApiError{http.StatusBadRequest, fmt.Errorf("%s must me not empty", field)}
-	}
-
-	return nil
-}
-
-func validateMinInt(field string, val int, minVal int) error {
-	if val < minVal {
-		return ApiError{http.StatusBadRequest, fmt.Errorf("%v must be >= %v", field, minVal)}
-	}
-
-	return nil
-}
-
-func validateMinString(field string, val string, minVal int) error {
-	if len(val) < minVal {
-		return ApiError{http.StatusBadRequest, fmt.Errorf("%v len must be >= %v", field, minVal)}
-	}
-
-	return nil
-}
-
-func validateMaxInt(field string, val int, minVal int) error {
-	if val > minVal {
-		return ApiError{http.StatusBadRequest, fmt.Errorf("%v must be <= %v", field, minVal)}
-	}
-
-	return nil
-}
-
-func validateMaxString(field string, val string, minVal int) error {
-	if len(val) > minVal {
-		return ApiError{http.StatusBadRequest, fmt.Errorf("%v len must be <= %v", field, minVal)}
-	}
-
-	return nil
-}
-
-func validateEnum(field string, val string, enum []string) error {
-	for _, valid := range enum {
-		if valid == val {
-			return nil
-		}
-	}
-
-	return ApiError{http.StatusBadRequest, fmt.Errorf("%v must be one of [%v]", field, strings.Join(enum, ", "))}
-}
-`)
+`, g.data.PackageName)
 }
 
 // newServeTpl cоздает шаблон для генерации кода обработчика запросов API
 func (g *codeGenerator) newServeTpl() *template.Template {
-	return template.Must(template.New("serveTpl").Parse(`func (h *{{ .Name }}) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	return template.Must(template.New("serveTpl").Parse(`
+func (h *{{ .Name }}) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var (
-		out interface{}
 		err error
+		out interface{}
 	)
 
 	switch r.URL.Path {
@@ -402,21 +314,34 @@ func (g *codeGenerator) newServeTpl() *template.Template {
 		err = ApiError{Err: fmt.Errorf("unknown method"), HTTPStatus: http.StatusNotFound}
 	}
 
-	if err == nil {
-		sendResponse(w, ApiResponse{Data: out})
-	} else if errApi, ok := err.(ApiError); ok {
-		sendResponse(w, ApiResponse{Error: errApi.Error(), statusCode: errApi.HTTPStatus})
-	} else {
-		sendResponse(w, ApiResponse{Error: err.Error(), statusCode: http.StatusInternalServerError})
-	}
-}
+	response := struct {
+		Data  interface{} ` + "`" + `json:"response,omitempty"` + "`" + `
+		Error string      ` + "`" + `json:"error"` + "`" + `
+	}{}
 
+	if err == nil {
+		response.Data = out
+	} else {
+		response.Error = err.Error()
+
+		if errApi, ok := err.(ApiError); ok {
+			w.WriteHeader(errApi.HTTPStatus)
+		} else {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+	}
+
+	jsonResponse, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonResponse)
+}
 `))
 }
 
 // newWrapperTpl cоздает шаблон для генерации кода обработчика метода API
 func (g *codeGenerator) newWrapperTpl() *template.Template {
-	return template.Must(template.New("wrapperTpl").Parse(`func (h *{{ .HandlerName }}) wrapper{{ .Name }}(w http.ResponseWriter, r *http.Request) (interface{}, error) {
+	return template.Must(template.New("wrapperTpl").Parse(`
+func (h *{{ .HandlerName }}) wrapper{{ .Name }}(w http.ResponseWriter, r *http.Request) (interface{}, error) {
 	{{ if .Api.Auth -}}
 	if r.Header.Get("X-Auth") != "100500" {
 		return nil, ApiError{http.StatusForbidden, fmt.Errorf("unauthorized")}
@@ -431,20 +356,28 @@ func (g *codeGenerator) newWrapperTpl() *template.Template {
 
 	{{ end -}}
 
-	in, err := new{{ .RequestName }}(getParams(r));
+	var params url.Values
+	if r.Method == "GET" {
+		params = r.URL.Query()
+	} else {
+		body, _ := ioutil.ReadAll(r.Body)
+		params, _ = url.ParseQuery(string(body))
+	}
+
+	in, err := new{{ .RequestName }}(params)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return h.{{ .Name }}(r.Context(), in)
 }
-
 `))
 }
 
 // newValidatorTpl cоздает шаблон для генерации кода валидации структуры
 func (g *codeGenerator) newValidatorTpl() *template.Template {
-	return template.Must(template.New("validatorTpl").Parse(`func new{{ .Name }}(v url.Values) ({{ .Name }}, error) {
+	return template.Must(template.New("validatorTpl").Parse(`
+func new{{ .Name }}(v url.Values) ({{ .Name }}, error) {
 	var err error
 	s := {{ .Name }}{}
 
@@ -455,44 +388,73 @@ func (g *codeGenerator) newValidatorTpl() *template.Template {
 	if err != nil {
 		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} must be int")}
 	}
-	{{- else }}
-	s.{{ .Name }} = v.Get("{{ .Rules.ParamName }}")
-	{{- end -}}
 
-	{{- if .Rules.Default }}
+	{{ else }}
+	s.{{ .Name }} = v.Get("{{ .Rules.ParamName }}")
+
+	{{ end -}}
+
+	{{- if .Rules.Default -}}
 	if s.{{ .Name }} == "" {
 		s.{{ .Name }} = "{{ .Rules.Default }}"
 	}
-	{{- end -}}
-
-	{{- if .Rules.Required }}
-	if err = validateEmpty("{{ .Rules.ParamName }}", s.{{ .Name }}); err != nil {
-		return s, err
-	}
-	{{- end -}}
-
-	{{- if .Rules.Min }}
-	if err = validateMin{{ .Type }}("{{ .Rules.ParamName }}", s.{{ .Name }}, {{ .Rules.MinValue }}); err != nil {
-		return s, err
-	}
-	{{- end -}}
-
-	{{- if .Rules.Max }}
-	if err = validateMax{{ .Type }}("{{ .Rules.ParamName }}", s.{{ .Name }}, {{ .Rules.MaxValue }}); err != nil {
-		return s, err
-	}
-	{{- end -}}
-
-	{{- if .Rules.Enum }}
-	enum := []string{ {{ range $index, $element := .Rules.Enum }}{{ if $index }}, {{ end }}"{{ $element }}"{{ end }} }
-	if err = validateEnum("{{ .Rules.ParamName }}", s.{{ .Name }}, enum); err != nil {
-		return s, err
-	}
-	{{- end }}
 
 	{{ end -}}
-	return s, nil
-}
 
+	{{- if .Rules.Required -}}
+	if s.{{ .Name }} == "" {
+		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} must me not empty")}
+	}
+
+	{{ end -}}
+
+	{{- if and .Rules.Min (eq .Type "Int") -}}
+	if s.{{ .Name }} < {{ .Rules.MinValue }} {
+		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} must be >= {{ .Rules.MinValue }}")}
+	}
+
+	{{ end -}}
+
+	{{ if and .Rules.Min (eq .Type "String") -}}
+	if len(s.{{ .Name }}) < {{ .Rules.MinValue }} {
+		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} len must be >= {{ .Rules.MinValue }}")}
+	}
+
+	{{ end -}}
+
+	{{- if and .Rules.Max (eq .Type "Int") -}}
+	if s.{{ .Name }} > {{ .Rules.MaxValue }} {
+		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} must be <= {{ .Rules.MaxValue }}")}
+	}
+
+	{{ end -}}
+
+	{{- if and .Rules.Max (eq .Type "String") -}}
+	if len(s.{{ .Name }}) > {{ .Rules.MaxValue }} {
+		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} len must be <= {{ .Rules.MaxValue }}")}
+	}
+
+	{{ end -}}
+
+	{{- if .Rules.Enum -}}
+	enum{{ .Name }}Valid := false
+	enum{{ .Name }} := []string{ {{- range $index, $element := .Rules.Enum }}{{ if $index }}, {{ end }}"{{ $element }}"{{ end -}} }
+
+	for _, valid := range enum{{ .Name }} {
+		if valid == s.{{ .Name }} {
+			enum{{ .Name }}Valid = true
+			break
+		}
+	}
+
+	if !enum{{ .Name }}Valid {
+		return s, ApiError{http.StatusBadRequest, fmt.Errorf("{{ .Rules.ParamName }} must be one of [%s]", strings.Join(enum{{ .Name }}, ", "))}
+	}
+
+	{{ end -}}
+
+	{{- end -}}
+	return s, err
+}
 `))
 }
