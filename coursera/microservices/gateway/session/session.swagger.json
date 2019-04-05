@@ -1,0 +1,125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "session.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/session/check/{ID}": {
+      "get": {
+        "operationId": "Check",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sessionSession"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "AuthChecker"
+        ]
+      }
+    },
+    "/v1/session/create": {
+      "post": {
+        "operationId": "Create",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sessionSessionID"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sessionSession"
+            }
+          }
+        ],
+        "tags": [
+          "AuthChecker"
+        ]
+      }
+    },
+    "/v1/session/delete": {
+      "post": {
+        "operationId": "Delete",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sessionNothing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sessionSessionID"
+            }
+          }
+        ],
+        "tags": [
+          "AuthChecker"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "sessionNothing": {
+      "type": "object",
+      "properties": {
+        "dummy": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "sessionSession": {
+      "type": "object",
+      "properties": {
+        "login": {
+          "type": "string"
+        },
+        "useragent": {
+          "type": "string"
+        }
+      }
+    },
+    "sessionSessionID": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

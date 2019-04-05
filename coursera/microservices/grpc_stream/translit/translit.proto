@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// protoc --go_out=plugins=grpc:. *.proto
+
+package translit;
+
+message Word {
+  string Word = 1;
+}
+
+// grpc-сервис транслитерации
+service Transliteration {
+    rpc EnRu (stream Word) returns (stream Word) {}
+}
+

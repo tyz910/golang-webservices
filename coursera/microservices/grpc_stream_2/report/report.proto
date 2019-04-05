@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// protoc --go_out=plugins=grpc:. *.proto
+
+package report;
+
+message Word {
+  string Word = 1;
+}
+
+// grpc-сервис проверки авторизации
+service Transliteration {
+    rpc EnRu (Request) returns (stream Response) {}
+}
+

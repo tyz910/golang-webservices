@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+// protoc --go_out=. *.proto
+
+package main;
+
+message SessionID {
+  string ID = 1;
+}
+
+message Session {
+  string login = 1;
+  string useragent = 2;
+}
