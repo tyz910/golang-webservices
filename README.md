@@ -308,3 +308,14 @@ TODO
 - [http://rodaine.com/2017/05/x-files-time-rate-golang/](http://rodaine.com/2017/05/x-files-time-rate-golang/)
 - [https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236](https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236)
 - [http://tumregels.github.io/Network-Programming-with-Go/](http://tumregels.github.io/Network-Programming-with-Go/)
+
+## Материалы для чтения к 8-му уроку
+
+- [https://www.limitlessfx.com/cross-compile-golang-app-for-windows-from-linux.html](https://www.limitlessfx.com/cross-compile-golang-app-for-windows-from-linux.html)
+- [https://habrahabr.ru/post/249449/](https://habrahabr.ru/post/249449/) - Кросс-компиляция в Go
+- [https://habrahabr.ru/post/337348/](https://habrahabr.ru/post/337348/) - вызов rust из go
+- [https://habrahabr.ru/company/intel/blog/275709/](https://habrahabr.ru/company/intel/blog/275709/) - С-вызовы в Go: принцип работы и производительность
+- [https://stackshare.io/stream/stream-and-go-news-feeds-for-over-300-million-end-users](https://stackshare.io/stream/stream-and-go-news-feeds-for-over-300-million-end-users)
+- [https://medium.com/kokster/writing-a-jit-compiler-in-golang-964b61295f](https://medium.com/kokster/writing-a-jit-compiler-in-golang-964b61295f)- Writing a JIT compiler in Golang
+- [https://github.com/spf13/viper](https://github.com/spf13/viper)- мощная система для работы с конфигом
+- [https://www.programming-books.io/essential/go/](https://www.programming-books.io/essential/go/)
